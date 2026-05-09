@@ -1,8 +1,12 @@
 import { PrismaClient, Country } from "./generated/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 
-
-
-const prisma = new PrismaClient();
+const connectionString = process.env.DATABASE_URL;
+if (!connectionString) {
+  throw new Error("DATABASE_URL is not set");
+}
+const adapter = new PrismaPg({ connectionString });
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
   console.log('🌱 Seeding restaurants and menu items...');
@@ -15,11 +19,11 @@ async function main() {
       country: Country.INDIA,
       menuItems: {
         create: [
-          { name: 'Butter Chicken', price: 280, description: 'Creamy tomato based chicken curry' },
-          { name: 'Paneer Tikka', price: 220, description: 'Grilled cottage cheese with spices' },
-          { name: 'Dal Makhani', price: 180, description: 'Slow cooked black lentils' },
-          { name: 'Garlic Naan', price: 60, description: 'Soft bread with garlic butter' },
-          { name: 'Mango Lassi', price: 80, description: 'Chilled mango yogurt drink' },
+          { name: 'Butter Chicken', price: 280 },
+          { name: 'Paneer Tikka', price: 220 },
+          { name: 'Dal Makhani', price: 180 },
+          { name: 'Garlic Naan', price: 60 },
+          { name: 'Mango Lassi', price: 80 },
         ],
       },
     },
@@ -31,11 +35,11 @@ async function main() {
       country: Country.INDIA,
       menuItems: {
         create: [
-          { name: 'Vada Pav', price: 40, description: 'Mumbai street style potato burger' },
-          { name: 'Pav Bhaji', price: 120, description: 'Spiced vegetable mash with bread' },
-          { name: 'Chicken Biryani', price: 300, description: 'Aromatic basmati rice with chicken' },
-          { name: 'Masala Chai', price: 30, description: 'Spiced Indian tea' },
-          { name: 'Gulab Jamun', price: 80, description: 'Soft milk dumplings in sugar syrup' },
+          { name: 'Vada Pav', price: 40 },
+          { name: 'Pav Bhaji', price: 120 },
+          { name: 'Chicken Biryani', price: 300 },
+          { name: 'Masala Chai', price: 30 },
+          { name: 'Gulab Jamun', price: 80 },
         ],
       },
     },
@@ -47,11 +51,11 @@ async function main() {
       country: Country.INDIA,
       menuItems: {
         create: [
-          { name: 'Rajasthani Thali', price: 350, description: 'Full meal with dal baati churma' },
-          { name: 'Chole Bhature', price: 150, description: 'Spiced chickpeas with fried bread' },
-          { name: 'Aloo Paratha', price: 90, description: 'Stuffed potato flatbread with butter' },
-          { name: 'Raita', price: 50, description: 'Yogurt with cucumber and spices' },
-          { name: 'Kheer', price: 100, description: 'Rice pudding with cardamom' },
+          { name: 'Rajasthani Thali', price: 350 },
+          { name: 'Chole Bhature', price: 150 },
+          { name: 'Aloo Paratha', price: 90 },
+          { name: 'Raita', price: 50 },
+          { name: 'Kheer', price: 100 },
         ],
       },
     },
@@ -65,11 +69,11 @@ async function main() {
       country: Country.AMERICA,
       menuItems: {
         create: [
-          { name: 'Classic Cheeseburger', price: 12, description: 'Beef patty with cheddar and pickles' },
-          { name: 'BBQ Bacon Burger', price: 15, description: 'Smoky BBQ sauce with crispy bacon' },
-          { name: 'Veggie Burger', price: 11, description: 'Plant based patty with fresh veggies' },
-          { name: 'Loaded Fries', price: 7, description: 'Fries with cheese sauce and jalapenos' },
-          { name: 'Chocolate Milkshake', price: 6, description: 'Thick creamy chocolate shake' },
+          { name: 'Classic Cheeseburger', price: 12 },
+          { name: 'BBQ Bacon Burger', price: 15 },
+          { name: 'Veggie Burger', price: 11 },
+          { name: 'Loaded Fries', price: 7 },
+          { name: 'Chocolate Milkshake', price: 6 },
         ],
       },
     },
@@ -81,11 +85,11 @@ async function main() {
       country: Country.AMERICA,
       menuItems: {
         create: [
-          { name: 'Pepperoni Pizza', price: 18, description: 'Classic NY style pepperoni pizza' },
-          { name: 'BBQ Chicken Pizza', price: 20, description: 'Tangy BBQ chicken with red onions' },
-          { name: 'Margherita Pizza', price: 15, description: 'Fresh basil and mozzarella' },
-          { name: 'Caesar Salad', price: 9, description: 'Romaine lettuce with caesar dressing' },
-          { name: 'Garlic Bread', price: 5, description: 'Toasted bread with garlic butter' },
+          { name: 'Pepperoni Pizza', price: 18 },
+          { name: 'BBQ Chicken Pizza', price: 20 },
+          { name: 'Margherita Pizza', price: 15 },
+          { name: 'Caesar Salad', price: 9 },
+          { name: 'Garlic Bread', price: 5 },
         ],
       },
     },
@@ -97,11 +101,11 @@ async function main() {
       country: Country.AMERICA,
       menuItems: {
         create: [
-          { name: 'Pancake Stack', price: 10, description: 'Fluffy pancakes with maple syrup' },
-          { name: 'Club Sandwich', price: 13, description: 'Triple decker with turkey and bacon' },
-          { name: 'Mac and Cheese', price: 11, description: 'Creamy baked macaroni with cheese' },
-          { name: 'Chicken Wings', price: 14, description: 'Crispy wings with buffalo sauce' },
-          { name: 'Apple Pie', price: 7, description: 'Classic american apple pie with cream' },
+          { name: 'Pancake Stack', price: 10 },
+          { name: 'Club Sandwich', price: 13 },
+          { name: 'Mac and Cheese', price: 11 },
+          { name: 'Chicken Wings', price: 14 },
+          { name: 'Apple Pie', price: 7 },
         ],
       },
     },
